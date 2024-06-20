@@ -14,26 +14,27 @@ The plan is to create a series of "worlds" where many players are each given a b
 
 ![[town.jpeg]]
 #### 2) Open World
-The format of the "worlds" are more or less continuous spaces. The space within them is broken up by natural geographic features as well as flora and fauna which have various physical properties that allow *them* to interact with the *player*  , like a rock or tree not allowing movement, or a beastie gnoshing on the player.
+The format of the "worlds" is more or less continuous spaces. The space within them is broken up by natural geographic features as well as flora and fauna which have various physical properties that allow *them* to interact with the *player*  , like a rock or tree not allowing movement, or a beastie gnoshing on the player.
 ![[desert_shmoops.jpeg]]
 #### 3) Ecosystem Simulation
-I touched on it above, but I am o drawn to the agency of a world itself, particular the capacity for emergent behavior, which is essentially the part of life that is the most magical. Here is a pattern that creates patterns, and cannot be predicted. I believe that my encoding some of the behavior and properties of the game organisms into a genetic-like object that mutates and is subject to reproductive and survival-driven species selection, I may be able to emulate some of that magic.
+I am also drawn to the agency of the world *itself*, particularly the capacity for emergent behavior. Life is a pattern that creates patterns. Encoding some of the behavior and properties of the game organisms with gene-line objects may allow me to emulate some of the magic of that consequent unpredictability.
 
 ![[elements_rts.jpeg]]
 
 #### 4) Chemical Abstraction
-So here's the thing about ecosystems - they have to be based on immutable rules. The real world is. Otherwise, one creature could just have like 1000K strength and eat us all. Or maybe, since that creature would starve after killing everything else, a better example would be that a creature could just have a lifespan of infinity, if there were no limitations to that capability, negating any *necessity* for ecosystems/species selection/evolution to exist. So I need that to. Some sort of bedrock of immutable laws. I basically envision these tropic layers that all stem from some inherent energy that comes from occupying space (photosynthesis, but an abstraction) and minerals in the ground.
+So here's the thing about ecosystems - they have to be based on immutable rules. The real world is. Otherwise, one creature could have "1000K strength" and eat us all. Or maybe, since that creature would starve after killing everything else, a better example would be that a creature could just have a lifespan of infinity, if there were no limitations to that capability, negating any *necessity* for ecosystems/species selection/evolution to exist. So I need that too; a bedrock of immutable laws. I envision tropic layers that stem from inherent energy and space (photosynthesis as an abstract) and minerals in the ground
 
 #### 4) Persistence and Time
-The most obvious lifespan of a game seems to be, historically, for it to begin when players join and end when players leave. This provides a tempting opportunity to create a game that begins far before any player joins, and continues regardless of whether anyone is around. This is what makes the real world so mysterious and wonderful.
+The most obvious lifespan of a game is for it to begin when players join and end when players leave. This provides a tempting opportunity to create a game that originates far before any player joins, and continues regardless of whether anyone is around. This is what makes the real world so mysterious and wonderful.
 
 
 #### 5) POV
-This is the least important property but still something that interests me. RTS games are generally third person views from above, and then there is the common first person perspective in games. I would like to provide he ability to switch between them. This is possible in the live demo posted above. I'm interested in interacting with the ecosystem both as an individual *and* a collective of individuals.
+RTS games are generally third-person, and first-person shooters are, you know.  I'm interested in a hybrid perspective. This is possible to see in the live demo posted above. I want to create an experience where a player may interact with the ecosystem both as an individual *and* as a collective *of* individuals.
 ![[pov.png]]
 
 ### Previous Projects
-Here is a screenshot from an ecosystem simulator I created in unity. You can see bunnies with lifespan and reproductive timer bars floating above their heads, scanning their surroundings for grass and eating it. I got granular with their sensory perception in the hopes it would create interesting and organic behavior, and I think I achieved a bit of the latter, if not the former.
+Here is a screenshot from an ecosystem simulator I created in the game engine Unity. You can see bunnies with lifespan and reproductive timer bars floating above their heads, scanning their surroundings for grass and eating it. Their visual sensory perception is relatively organic, composed of a scattered slew of ray tracers detecting what kind of objects are in front of them in the hopes it would create interesting and organic behavior, and I think I achieved a bit of the latter, if not the former.
+
 ![[grass2.jpeg]]
 I haven't yet deployed the version above, but you [can play with the barebones of this environment in a live demo here](https://simmer.io/@Kua/grassworldv1)
 
@@ -60,7 +61,8 @@ this is pretty loose. I don't know if I believe that games can mitigate the effe
 Maintaining an ecosystem on a server is computationally expensive, and could be hard to scale horizontally if more and more users are interacting with the same world and the world is becoming more and more complex. Distributed databases might offer some interesting and creative solutions to this challenge, if the game is every computationally expensive enough for this to be necessary.
 
 ---
-# May 24th: Getting Started
+# Process: Part I
+## May 24: Getting Started
 
 I started with a basic socket.io implementation on the server and the client.socket.io on both the server and the client. At first I found the structure of their documentation slightly confusing, but figuring out how it was broken down between client and server docs:
 
@@ -137,7 +139,7 @@ It seemed like each moss should have multiple children, so I messed around with 
 <img src="https://thornberry-garden.s3.us-east-2.amazonaws.com/moss-looping.gif" gif loop=true>
 
 ---
-# May 26th: Optimization
+## May 26: Optimization
 Things started crashing. Originally, I passed every object to the client, which was a bit silly. I refactored in a few ways
 - Only pass the color per square
 - only re-render divs that need to change
@@ -202,7 +204,7 @@ Maybe I can get the podcast [99% invisible](https://99percentinvisible.org/) to 
 ![[correct_array.png]]
 
 ---
-# May 28: Organism Behavior
+## May 28: Organism Behavior
 Oof. I was disappointed to find that when I refactored the moss into a class inheritance system, the behavior didn't hit the same, so I ended up playing around a lot with it. It also DEFINITELY was still crashing, probably because the cycles of reproduction per generation were so dramatically in sync.
 
 <div class="video-container"> <video controls> <source src="https://thornberry-garden.s3.us-east-2.amazonaws.com/Moss1.mp4" type="video/mp4"> Your browser does not support the video tag. </video> </div>
@@ -233,7 +235,7 @@ All this said, the most rational thing to do seemed to be to open up the Node pr
 
 It wasn't the biggest revelation, but the draw calls were certainly surpassing the amount of time allotting to the frames they were called in. So the easiest way to kill latency would probably be to just simply slow down the reproductive behavior, or make it slightly more diffuse over time (less synchronized). Luckily, these happen to be things that really make sense for plants anyways. I hope to return to many of these optimization opportunities above, but they also each have the ability to kill the project by making it into an optimization project instead of a game.
 
-# May 29 - 31st: Graphics and Game Talks
+## May 29 : Talks
 I have been recommended this concept/article:
 [How to make a simple entity-component-system in C++](https://www.david-colson.com/2020/02/09/making-a-simple-ecs.html)
 
@@ -262,7 +264,7 @@ At some point somebody showed me this crazy cool game called [lichenia](https://
 
 To conclude, here's a thematic idea - what if there are human beings and you play as animals to destroy their civilization? Misanthropic, but a neat turn table.
 
-# May 31st Continued: Conversation with Alex Chen
+## May 31: Alex Chen
 Alex Chen has created a very performant multiplayer top-down shooter game between a bunch of colorful bubbles using a custom implementation of UDP.
 
 Here are some articles he sent me:
@@ -270,7 +272,7 @@ Here are some articles he sent me:
 [Choosing the right network model for your multiplayer game](https://mas-bandwidth.com/choosing-the-right-network-model-for-your-multiplayer-game/)
 
 
-# June 18: Rust
+## June 18: Rust / Deployment!
 That past couple weeks have flown by. I spent much of one week [creating this during a gamejam](https://sedson.itch.io/form-of-danger) and a lot of the second week working on my [[Gauntlet]] , which started during Impossible Day (where Recurser's try to do something impossible) and quickly became something I wanted to continue working on throughout the week.
 
 This week, I am working on deployment. [I did it actually! Here is the live Demo of what I have so far!](https://saskanupe-b0a033b8892a.herokuapp.com/) This was deployed with Heroku. I made it pretty far with dockerizing and deploying with the community disco server as well, but couldn't quite get it just yet.
@@ -281,7 +283,9 @@ One really reassuring part of the Rust community (besides all of it) is that [on
 
 ----
 
-# June 19th: Part II
+# Process: Part II
+## June 19: Overview
+### Project Structure
 Okay, I've deployed *something*, so I feel more comfortable walking through the project and trying to improve it a bit in its current state.
 
 ```
@@ -291,7 +295,9 @@ Okay, I've deployed *something*, so I feel more comfortable walking through the 
 - package.json
 ```
 
-And here's how to deploy to Heroku since I didn't document that the first time around:
+### Deployment to Heroku
+Here's how to deploy to Heroku since I didn't document that the first time around.
+This is my top-level `package.json` file, which references two more package.json's that live in  the `client` and `server` dirs, respectively.
 ```json
 "scripts": {
 	"start": "npm run build-client && npm run server",
@@ -311,5 +317,36 @@ I actually have omitted the `Procfile` Heroku sometimes wants because without it
 - [Deploying to Heroku from git](https://devcenter.heroku.com/articles/git)
 - [Here is a guide on deploying a Node app to Heroku](https://devcenter.heroku.com/articles/deploying-nodejs)
 
-> **One gotcha I faced:** Setting your node version in you package.json is very important, and making sure it lines up with version you're using locally and remotely.
+**One gotcha I faced:** Setting your node version in you package.json is very important, and making sure it lines up with version you're using locally and remotely.
 
+```zsh
+# $create a heroku remote
+heroku create -a example-app
+
+# Check it was created correctly
+git remote -v
+```
+
+**Note:** This won't work for an existing app that already has an origin. To do that, run:
+
+```
+heroku git:remote -a example-app
+```
+
+And then push to your heroku remote with:
+```
+git push heroku main
+```
+
+And in theory, your site should be live.
+
+### Three.js Experiments
+Woah three.js is really fun. I ended up making these sort of sculptures by accident as I was figuring things out.
+
+![[Screenshot 2024-06-20 at 2.01.40 PM.png]]![[Screenshot 2024-06-20 at 2.45.23 PM.png]]
+
+<div class="video-container"> <video controls> <source muted autoplay="false" src="https://thornberry-garden.s3.us-east-2.amazonaws.com/3js_wires.mov" type="video/mp4"> Your browser does not support the video tag. </video> </div>
+
+<div class="video-container"> <video controls> <source muted src="https://thornberry-garden.s3.us-east-2.amazonaws.com/3js_dots.mov" type="video/mp4"> Your browser does not support the video tag. </video> </div>
+
+<div class="video-container"> <video controls> <source muted autoplay="false" src="https://thornberry-garden.s3.us-east-2.amazonaws.com/3js_slots.mov" type="video/mp4"> Your browser does not support the video tag. </video> </div>
