@@ -12,14 +12,14 @@ My aim is to build a multiplayer online game with an ecosystem that persists and
 #### 1) **Multiplayer**
 The plan is to create a series of "worlds" where many players are each given a body to occupy space in the world. Their ability to interact with each other and world will start small, and extend as the project continues.
 
-![[town.png]]
+![[town.jpeg]]
 #### 2) Open World
 The format of the "worlds" are more or less continuous spaces. The space within them is broken up by natural geographic features as well as flora and fauna which have various physical properties that allow *them* to interact with the *player*  , like a rock or tree not allowing movement, or a beastie gnoshing on the player.
-![[desert_shmoops.png]]
+![[desert_shmoops.jpeg]]
 #### 3) Ecosystem Simulation
 I touched on it above, but I am o drawn to the agency of a world itself, particular the capacity for emergent behavior, which is essentially the part of life that is the most magical. Here is a pattern that creates patterns, and cannot be predicted. I believe that my encoding some of the behavior and properties of the game organisms into a genetic-like object that mutates and is subject to reproductive and survival-driven species selection, I may be able to emulate some of that magic.
 
-![[elements_rts.png]]
+![[elements_rts.jpeg]]
 
 #### 4) Chemical Abstraction
 So here's the thing about ecosystems - they have to be based on immutable rules. The real world is. Otherwise, one creature could just have like 1000K strength and eat us all. Or maybe, since that creature would starve after killing everything else, a better example would be that a creature could just have a lifespan of infinity, if there were no limitations to that capability, negating any *necessity* for ecosystems/species selection/evolution to exist. So I need that to. Some sort of bedrock of immutable laws. I basically envision these tropic layers that all stem from some inherent energy that comes from occupying space (photosynthesis, but an abstraction) and minerals in the ground.
@@ -34,7 +34,7 @@ This is the least important property but still something that interests me. RTS 
 
 ### Previous Projects
 Here is a screenshot from an ecosystem simulator I created in unity. You can see bunnies with lifespan and reproductive timer bars floating above their heads, scanning their surroundings for grass and eating it. I got granular with their sensory perception in the hopes it would create interesting and organic behavior, and I think I achieved a bit of the latter, if not the former.
-![[grass2.png]]
+![[grass2.jpeg]]
 I haven't yet deployed the version above, but you [can play with the barebones of this environment in a live demo here](https://simmer.io/@Kua/grassworldv1)
 
 ### Theme of Environmentalism and Ecological Sustainability
@@ -43,15 +43,15 @@ this is pretty loose. I don't know if I believe that games can mitigate the effe
 ### Inspiration
 
 - **RTS games** like Age of Empires, Age of Mythology and Black and White made a big impression on me. Their third-person dynamic allowed you to explore a world in a much bigger way, and see economies, like ecosystems, unfold as patterns.
-![[bnw2.png]]
+![[bnw2.jpeg]]
 
 - **Spore** is an incredibly ambitious game that, although imperfect, was really many games in one, and I think gave everyone a license to question what CAN'T be explored within the scope of a single game.
 
-![[spore4.png]]
+![[spore4.jpeg]]
 > Single cell organism stage of spore
 ![[spore5.png]]
 > Galactic view in spore
-![[spore6.png]]
+![[spore6.jpeg]]
 > World civilization stage in spore
 
 - Definitely Conway's Game of Life and Cellular Automata as a whole, not to mention John van Neumann's question of whether a system can create itself, all of which together are really for a whole other blog post.
