@@ -3,7 +3,10 @@ $mobileBreakpoint: 600px;
 $tabletBreakpoint: 1000px;
 $sidePanelWidth: 380px;
 $topSpacing: 6rem;
-$fullPageWidth: $pageWidth + 2 * $sidePanelWidth;
+
+// This is what controls the mimimum size for the full layout to show
+// $fullPageWidth: $pageWidth + 2 * $sidePanelWidth;
+$fullPageWidth: 1200px;
 $boldWeight: 700;
 $semiBoldWeight: 600;
 $normalWeight: 400;
