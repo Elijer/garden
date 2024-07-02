@@ -111,5 +111,3 @@ Cool. So we can send data to things. That's great. I also found that if I just r
 - wireless OSC transmission
 
 And it's really just time to write the program and solder everything together to start generating the output data with some combination of circuit completion and gyroscopic (and other!) sensors!
-
----
