@@ -1,15 +1,15 @@
 {
-  "name": "@jackyzha0/quartz",
+  "name": "@elijer/quartz",
   "description": "🌱 publish your digital garden and notes as a website",
   "private": true,
   "version": "4.2.3",
   "type": "module",
   "author": "jackyzha0 <j.zhao2k19@gmail.com>",
   "license": "MIT",
-  "homepage": "https://quartz.jzhao.xyz",
+  "homepage": "https://elijer.github.io/garden",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jackyzha0/quartz.git"
+    "url": "https://elijer.github.io/garden"
   },
   "scripts": {
     "blog": "npx quartz build --serve --directory ./content/blog",
