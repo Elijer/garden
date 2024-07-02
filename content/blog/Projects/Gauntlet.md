@@ -69,3 +69,45 @@ Charles told me that the strategy that keyboards and, possibly, older versions o
 Charles told me that something called capacitive sensors exist, but it sounded like they have not been around for very long. The idea is something along the lines of, if you have a conductor (a capacitive plate or "tank"), and you can monitor how much charge that capacitor is storing, you can also detect changes in it. A capacitor apparently changes in charge not only due to being loaded with electrons but *also* when the resistors around it change. This is sort of the idea behind one of those lamps that you can touch anywhere - when you touch a lamp like that, you aren't completing a circuit in the way I originally hoped to with my input gauntlet. Instead, you are just changing the environment around a part of that circuit, and that change in an internal capacitor is detected. Disclaimer: I barely know what I'm talking about here! I would definitely like to learn more about this type of charge detection and to fill the holes in my understanding.
 
 Charles told me a cool story about why capacitance is sometimes a better strategy for checking contact than circuit completion. He told me that apparently, older organs (like the kind you'd find in a church, or even an old theatre) used to play their various notes using circuit completion. However, over time, the components that were bashed against each other to complete these circuits corroded - possibly due some of the chemical effects of circuit completion - and they stopped working after a few decades. Checking capacitance, however, has no wear and tear because it can theoretically be done without contact.
+
+---
+
+# Friday June 21st
+Okay I have some new toys:
+1. Raspberry PI Pico W (Wireless)
+2. Conductive Tape
+3. Conductive Thread
+
+![[A3E4D652-864F-4F04-90E5-B18C3FD8BCF5.jpg]]
+
+![[043A16BA-F6D0-4942-B196-7AADEDE7CCAB.jpg]]
+
+The Raspberry Pi Pico W was recommended to me by the unpredictable and charming [Greg Sadetsky](https://greg.technology/) for it's small size and ability to connect to things wireless, which is the property I need most for this device to be an effective interface!
+
+I'm starting this guide now from raspberrypi.org to get started with this device:
+[Getting started with your Raspberry Pi Pico W](https://projects.raspberrypi.org/en/projects/get-started-pico-w)
+
+- Installed Thonny, a python IDE
+- Tried to connect my PI and it didn't work
+- Tried another mini HDMI cable and that did work!
+
+Pinout:
+- ![[Screenshot 2024-06-21 at 2.33.07 PM.png]]
+
+- [Getting started with your Raspberry Pi Pico W (wifi stuff)](https://projects.raspberrypi.org/en/projects/get-started-pico-w/1)
+- [Potentiometer tutorial](https://projects.raspberrypi.org/en/projects/introduction-to-the-pico/11)
+
+### Getting started with the Raspberry Pi Pico!
+- Not too difficult
+- Using micropython compiled by a micropython IDE called Thonny recommended by Raspberry Pi organization
+- Has Wifi, which it can use to send OSC on a local network
+
+Here's a video of sending potentiometer (also known as a twirly whirly) data via OSC:
+
+<div class="video-container"> <video controls> <source src="https://thornberry-garden.s3.us-east-2.amazonaws.com/twirly_whirly.mp4" type="video/mp4"> Your browser does not support the video tag. </video> </div>
+
+Cool. So we can send data to things. That's great. I also found that if I just renamed the Python file on the Pi to `main.py`, the Pi would run it on startup, and I could connect it to an external battery. So I have the capacity to:
+- wireless power
+- wireless OSC transmission
+
+And it's really just time to write the program and solder everything together to start generating the output data with some combination of circuit completion and gyroscopic (and other!) sensors!

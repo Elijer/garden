@@ -6,57 +6,59 @@ tags:
 publish: true
 ---
 # Description
-My aim is to build a multiplayer online game with an ecosystem that persists and evolves with or without player interaction.
+My goal is to build a persistent online ecosystem that contains a real-time multiplayer game inside of it. The goal of this article is to outline a more detailed "what" and "why" for this project, and chronicle where it takes me.
 
-### Properties
-#### 1) **Multiplayer**
-The plan is to create a series of "worlds" where many players are each given a body to occupy space in the world. Their ability to interact with each other and world will start small, and extend as the project continues.
+### Properties of the Vision
+#### **Multiplayer** 🎮
+A series of "worlds" where many players are each given a body to occupy space in the world. Those bodies will interact with the world and each other, but I don't have many opinions on the nature of those interactions. The gathering and exchange of information? Building structures?
 
 ![[town.jpeg]]
-#### 2) Open World
-The format of the "worlds" is more or less continuous spaces. The space within them is broken up by natural geographic features as well as flora and fauna which have various physical properties that allow *them* to interact with the *player*  , like a rock or tree not allowing movement, or a beastie gnoshing on the player.
+> A drawing of a town inspired by the innovative [Townscaper](https://oskarstalberg.com/Townscaper/), an ambient town-building game.
+#### Open World 🌍
+**Open World:** each "world" is a continuous space, although it may be broken up by geographic features, and generative mineral distributions. Flora and fauna make up the living terrain of these places, and each organism has physical properties that allow them to interact with both one another as well as human players.
+
 ![[desert_shmoops.jpeg]]
-#### 3) Ecosystem Simulation
-I am also drawn to the agency of the world *itself*, particularly the capacity for emergent behavior. Life is a pattern that creates patterns. Encoding some of the behavior and properties of the game organisms with gene-line objects may allow me to emulate some of the magic of that consequent unpredictability.
+> Sketch of a desert race of Shmoops, with behavior not unlike that of Meerkats or Prairie Dogs
+#### Ecosystem Simulation 🌳
+But this behavior is not static. Through the interaction between organisms and trophic layers, not only do population distributions of organisms throughout the world change over time, but the makeup of each organism does to due to an abstract genetic system.
 
 ![[elements_rts.jpeg]]
+> A sketch I made while thinking about reducing physics and chemistry into toy-like abstractions
+#### Abstract Laws of Physics and Chemistry 🧪
+Here's the thing about ecosystems - if they aren't based on immutable laws, they will be biased to select for unlimited power [until the world implodes](https://en.wikipedia.org/wiki/Akira_(1988_film). they have to be based on immutable rules. One creature would evolve to have "1000K strength" and eat us all. Physics IRL, especially the laws of conservation of energy and mass, requires a cost in exchange for every allowance. For my purposes, the laws themselves matter less than their consistency.
+#### Persistence and Time 🕰️
+Arguably the most popular lifespan structure of a game is this:
+- Begins when players join
+- Ends when they leave
+But I'd like to create a world that originates far before any player joins, and continues regardless of whether anyone is around. This is what makes the real world so mysterious and wonderful. Hopefully, this structure allows for games to *occur* within a world, rather than for the world to *be* the game. Possibly relevant: [SIMON SINEK: Finite vs infinite game](https://www.youtube.com/watch?v=ZCB-0LWAmxw)
 
-#### 4) Chemical Abstraction
-So here's the thing about ecosystems - they have to be based on immutable rules. The real world is. Otherwise, one creature could have "1000K strength" and eat us all. Or maybe, since that creature would starve after killing everything else, a better example would be that a creature could just have a lifespan of infinity, if there were no limitations to that capability, negating any *necessity* for ecosystems/species selection/evolution to exist. So I need that too; a bedrock of immutable laws. I envision tropic layers that stem from inherent energy and space (photosynthesis as an abstract) and minerals in the ground
-
-#### 4) Persistence and Time
-The most obvious lifespan of a game is for it to begin when players join and end when players leave. This provides a tempting opportunity to create a game that originates far before any player joins, and continues regardless of whether anyone is around. This is what makes the real world so mysterious and wonderful.
-
-
-#### 5) POV
-RTS games are generally third-person, and first-person shooters are, you know.  I'm interested in a hybrid perspective. This is possible to see in the live demo posted above. I want to create an experience where a player may interact with the ecosystem both as an individual *and* as a collective *of* individuals.
-![[pov.png]]
-
-### Previous Projects
-Here is a screenshot from an ecosystem simulator I created in the game engine Unity. You can see bunnies with lifespan and reproductive timer bars floating above their heads, scanning their surroundings for grass and eating it. Their visual sensory perception is relatively organic, composed of a scattered slew of ray tracers detecting what kind of objects are in front of them in the hopes it would create interesting and organic behavior, and I think I achieved a bit of the latter, if not the former.
-
-![[grass2.jpeg]]
-I haven't yet deployed the version above, but you [can play with the barebones of this environment in a live demo here](https://simmer.io/@Kua/grassworldv1)
-
-### Theme of Environmentalism and Ecological Sustainability
+### Theme of Environmentalism and Ecological Sustainability 🍃
 this is pretty loose. I don't know if I believe that games can mitigate the effect human beings are having on this planet, and of mass extinction and destruction of natural habitats of once beautifully complex ecosystems. If anything, it is a celebration of them. I think there is a dark beauty in seeing how fragile they are and in allowing the players in this game to destroy and alter these systems, if they choose.
 
-### Inspiration
+#### Other Miscellaneous Ideas for this Game
+![[pov.png]]
+> Sketch of the cosmic existentialism of birth into a 1st person view, somewhere.
 
-- **RTS games** like Age of Empires, Age of Mythology and Black and White made a big impression on me. Their third-person dynamic allowed you to explore a world in a much bigger way, and see economies, like ecosystems, unfold as patterns.
-![[bnw2.jpeg]]
+**POV**: RTS games are generally third person, and first-person are usually, you know. I think that a hybrid of the two would allow for an interesting intersection between individual and society-level gameplay.  [experimented a bit with implementing this hybrid here](https://simmer.io/@Kua/grassworldv1)
+**Time played constrains**: Fundamentally, a world that is "always on" and has any structures of competition will incentive *more play*. I don't believe in creating this incentive. To get around this, I'm considering imposing time constraints for players, only allowing the game to be played for a certain amount of time each day
+### Previous Projects 🐇
+Here is a screenshot from an ecosystem simulator I created in the game engine Unity. You can see bunnies with lifespan and reproductive timer bars floating above their heads. They continuously scan their surroundings for grass, and, if their reproductive bar is full, other bunnies. Their visual sensory perception is relatively organic, composed of a scattered slew of ray tracers detecting what objects are in front of them in the hopes it would create interesting and organic behavior.
 
-- **Spore** is an incredibly ambitious game that, although imperfect, was really many games in one, and I think gave everyone a license to question what CAN'T be explored within the scope of a single game.
+![[grass2.jpeg]]
+> Sorry, I haven't deployed this.
+
+### Inspiration 💡
+
+- **RTS games** like Age of Empires, Age of Mythology and Black and White
+- **Spore**, an incredibly ambitious game that was as innovative as it was flawed
+- **Conway's Game of Life** and **Cellular Automata** as a whole
+- **John van Neumann's** question of whether a system can create itself (a matter for another blog post)
 
 ![[spore4.jpeg]]
 > Single cell organism stage of spore
-![[spore5.png]]
-> Galactic view in spore
-![[spore6.jpeg]]
-> World civilization stage in spore
 
-- Definitely Conway's Game of Life and Cellular Automata as a whole, not to mention John van Neumann's question of whether a system can create itself, all of which together are really for a whole other blog post.
-### Wild Implementation Ideas
+![[spore5.png]]
+### Wild Implementation Ideas 🐗
 **Leveraging Distributed Databases**: 
 Maintaining an ecosystem on a server is computationally expensive, and could be hard to scale horizontally if more and more users are interacting with the same world and the world is becoming more and more complex. Distributed databases might offer some interesting and creative solutions to this challenge, if the game is every computationally expensive enough for this to be necessary.
 
@@ -118,14 +120,17 @@ io.on("connection", (socket) => {
 httpServer.listen(3000);
 ```
 
-[Here is a commit that's roughly this stage of code for a really minimal socket.io server/client handshake](https://github.com/Elijer/ecomog/tree/814222651737e78b3e8f8a66e52ef38807b5f1bd)
+> [If you'd like to try it out, here is a commit I made for a minimal socket.io server/client 'handshake' to play with](https://github.com/Elijer/ecomog/tree/814222651737e78b3e8f8a66e52ef38807b5f1bd)
 
-I also tried playing around with just the base [websocket library that's shipped with all browsers](https://github.com/Elijer/ecomog/tree/websocket)but I found that socket.io had some really useful features I did not think I would do a better job implementing myself.
+I also tried the [websocket library that's shipped with all browsers](https://github.com/Elijer/ecomog/tree/websocket)but I found that socket.io had some useful features I didn't need to reinvent.
 
-On top of this super basic structure, I created a grid of a bunch of divs and gave a player a location that was generated when they visited the url. By opening multiple browsers, I simulated what this could look like if multiple players joined.
+On top of this super basic handshake,
+- I rendered a grid of divs
+- gave a player a UUID and random location when they first visited the URL
+- Saved that player's UUID so their location persisted across visits
 ![[mog1.png]]
 
-Content that I had the beginnings of a multiplayer system, I moved onto the ecosystem. Here are some "plants"!
+Once I was content that I had the beginnings of a multiplayer system, I impatiently moved onto the ecosystem. Here are some "plants"!
 ![[mog3-moss.png]]
 
 Each of these is sent as a class instance every second.
@@ -134,13 +139,13 @@ Each of these is sent as a class instance every second.
 I gave each object some "reproductive" behavior, which actually looked more like movement.
 <img src="https://thornberry-garden.s3.us-east-2.amazonaws.com/simple_repro_loop_moss.gif" gif loop=true>
 
-It seemed like each moss should have multiple children, so I messed around with the generation size and got this.
+It seemed like each moss should have multiple children, so I messed around with the generation size:
 
 <img src="https://thornberry-garden.s3.us-east-2.amazonaws.com/moss-looping.gif" gif loop=true>
 
 ---
-## May 26: Optimization
-Things started crashing. Originally, I passed every object to the client, which was a bit silly. I refactored in a few ways
+## May 26: Optimizations
+Then things started crashing. Originally, I passed every object to the client, which was a bit silly. I refactored in a few ways.
 - Only pass the color per square
 - only re-render divs that need to change
 - Added an accompanying object with references to each object in their location *in addition* to the double-nested array/grid structure, which allowed for much cheaper iterations through organisms*
@@ -350,3 +355,34 @@ Woah three.js is really fun. I ended up making these sort of sculptures by accid
 <div class="video-container"> <video controls> <source muted src="https://thornberry-garden.s3.us-east-2.amazonaws.com/3js_dots.mov" type="video/mp4"> Your browser does not support the video tag. </video> </div>
 
 <div class="video-container"> <video controls> <source muted autoplay="false" src="https://thornberry-garden.s3.us-east-2.amazonaws.com/3js_slots.mov" type="video/mp4"> Your browser does not support the video tag. </video> </div>
+
+
+# June 27th: Lessons in Memory
+
+I've been looking into Memory profiling and [this video from 11 years ago](https://www.youtube.com/watch?v=L3ugr9BJqIs) was not only helpful in showing how chrome dev tools can help with that but also had a really great primer on how memory is handled by the browser to begin with. 
+
+# June 28th: Performance
+
+I demo'd this project a few times which was really exciting:
+
+<div class="video-container"> <video controls> <source muted autoplay="false" src="https://thornberry-garden.s3.us-east-2.amazonaws.com/demo_graphics.mov" type="video/mp4"> Your browser does not support the video tag. </video> </div>
+
+Afterwards, I dealt with some lower-hanging usability and performance issues, and got to around this status:
+
+Reasonable performance in the browser with multiple players: ✅
+Performance on mobile: ❌ (crashes after about 10 seconds)
+Well-managed Memory: ❌ (there are memory leaks in the clientside)
+Live demo: https://jungle.rcdis.co/
+
+I ALSO got help from the invigorating [Greg Sadetsky](https://greg.technology/)on deploying a containerized version of this project through our disco community server in addition to my Heroku deployment just to see how it faired. Serendipitously, Greg's keyboard output was configured differently, resulting it what can only be called "The Zoomies". Surprised and excited by this movement behavior, I added sound and some post-processing to heighten the zoomies:
+
+
+<div class="video-container"> <video controls> <source muted autoplay="false" src="https://thornberry-garden.s3.us-east-2.amazonaws.com/zoomies.mov" type="video/mp4"> Your browser does not support the video tag. </video> </div>
+
+This gameplay is too fast-paced for what I'm going for and isn't really doing anything for performance, but it was fun to experiment with. I kidn't kill my darlings though, so for now, I just added a "fun mode" button.
+
+### Some Links
+[Three.js Optimization - Best Practices and Techniques | Pretty thorough video on best practices for optimization](https://www.youtube.com/watch?v=dc5iJVInpPY)
+[Intro to React Three Fiber](https://www.youtube.com/watch?v=vTfMjI4rVSI)
+[The Study of Shaders with React Three Fiber](https://blog.maximeheckel.com/posts/the-study-of-shaders-with-react-three-fiber/)
+

@@ -6,7 +6,9 @@ publish: true
 toc: "true"
 ---
 ## Hi, I'm Elijah!
-![[oatmeal.jpeg]]
+
+![[yoohoo.jpeg]]
+
 I'm an artist, a programmer, and I like running around in the woods and climbing things. I am from Arlington Virginia, but I have spent the last few years in Memphis and recently relocated to NYC. Ask my about peace corps, converting a van into a home, or Jenny Odell's excellent book "How to Do Nothing".
 
 I'm making this site as an easy, low-pressure way for me chronicle some of my ideas, art and experiences for myself. This is partially for myself, and partially so I can share them whenever the need arises. If you have any questions, feel free to reach out at elijahclimbs at gmail dot com.

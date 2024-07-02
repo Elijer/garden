@@ -1,0 +1,3 @@
+- Gamejam
+- Workflow and creative process
+- The Web Audio API and incorporating my library with other people's code
