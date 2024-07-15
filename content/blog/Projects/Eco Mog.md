@@ -386,3 +386,9 @@ This gameplay is too fast-paced for what I'm going for and isn't really doing an
 [Intro to React Three Fiber](https://www.youtube.com/watch?v=vTfMjI4rVSI)
 [The Study of Shaders with React Three Fiber](https://blog.maximeheckel.com/posts/the-study-of-shaders-with-react-three-fiber/)
 
+# July 9th
+Good things! It was a lot of work but I seriously optimized the project in the following ways:
+- Instead of sending the entire world state *every time it changes*, only the relevant change is being sent
+- Instead of tearing down and recreating most rendered objects in the scene, I am binding objects with their representation in state, and physically moving those objects in the scene accordingly.
+
+As a result, I have:
