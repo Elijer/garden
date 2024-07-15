@@ -103,11 +103,8 @@ async function renderGLB(fileUrl) {
 				});
 
 				lastEmitTime = currentTime;
-
 			}
-
 		}
-
 	}
 
 
@@ -130,7 +127,7 @@ The result is far from perfect, but for a day's work I'm happy with it!
 
 <div class="video-container"> <video controls> <source src="https://thornberry-garden.s3.us-east-2.amazonaws.com/backpack.mov" type="video/mp4"> Your browser does not support the video tag. </video> </div>
 
-You may notice in the code above that I am calculating the intersection between the user's mouse and the model, and then sending that to the server. What isn't totally clear from the video above is that on the server, those mouse updates are getting saved to an object of mouse updates associated with players, allowing players in theory to see the live cursor location of another user:
+In the javascript above, I am calculating the intersection between the user's mouse and the model, and then sending those coordinates to the server. What isn't clear from the video above is that on the server, those mouse updates are getting saved to an object of mouse updates associated with players, allowing players in theory to see the live cursor location of another user:
 
 ```javascript
 socket.on('cursorPosition', (data) => {
@@ -139,13 +136,17 @@ socket.on('cursorPosition', (data) => {
 });
 ```
 
-This seemed to work, although when I opened things up in two tabs, it seemed like the javascript execution (and therefore the event listeners) was paused for the inactive window; I would see the updates to the cursor positions, but only when I used that tab. This behavior isn't consistent with another [[Eco Mog |websocket project of mine]]. I'm not sure what's causing it. In hindsight, I should have called up a friend to test this locally. However, my roommate wasn't home, and I was itching to see if this worked, so I decided to deploy it and test the cursor syncing between my phone and laptop.
+This sort of worked. When I opened up two tabs of the project, it seemed like the javascript execution was paused until that window was active. This made it hard to tell how it would behave if two people opened it on separate machines.
 
-Once deployed, I realized that in order for my server's file server to work, I would need to configure a Docker volume. This should be pretty easy in theory, but I also realized I hadn't thought through the file storage at all when jumping in, and I had some pretty basic questions about what architecture to go with:
+> This behavior isn't consistent with another [[Eco Mog |websocket project of mine]], making me wonder if there's an issue with my websocket logic
+
+I went ahead and deployed it so I could try to test this functionality between my computer and my phone.
+
+Once I deployed, I realized that for my server's file server to work, I needed to configure a Docker volume. This should be pretty easy in theory, but I also realized I hadn't thought through the file storage at all when jumping in, and I had some pretty basic questions about what architecture to go with:
 - Should I save the files on the server, or use a file storage platform like S3?
-- What is the ideal user flow of file uploading? If the files are all there, should there be a directory of active projects, or should you just upload and get redirected to a route just for that 3D model?
+- What is the ideal user flow of file uploading? If the files are all there, should there be a directory of active projects, or should users get redirected to a route for every newly uploaded 3D model?
 
-Much of the Sunday was gone at this point. It seemed like a good time to go pause and go on a bike ride, so I left these questions for a later time.
+Much of the Sunday was gone at this point. It seemed like a good time to pause and go on a bike ride, so I left these questions for a later time.
 
 With websockets and careful spatial math, I could build this into a useful object annotation tool. While working on it, I realized that the things I would like to improve are:
 
