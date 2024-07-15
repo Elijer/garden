@@ -6,28 +6,25 @@ tags:
 ![[backpack.png]]
 I was talking to a backpack designer and, being someone who carries a backpack almost everywhere, had a lot of questions. He told me about sending designs to a factory overseas and the communication process involved. I asked him what the trickiest part about that process was and if he could buy/build any technology, what would help the process go more smoothly.
 
-David told me that if both he and his sample designer in Vietnam could wear a VR headset and see the other point at things, and annotate parts of a 3D design in front of them, that could save a lot of time.
+David told me that if both he and his sample designer in Vietnam could wear a VR headset, see the other point at things, and annotate parts of a 3D design in front of them, that would save a lot of time - maybe weeks on the month.
 
-This immediately sounded like a thrilling project to me to work on. However, it also seemed like there were probably tools out there that would do exactly what we were talking about. I tried out something called [Spline](https://spline.design/), which seemed very powerful, and did seem to have live collaboration capabilities. It seemed like if I sat down with David we might be able to find a way to use this. In any case, the first step was creating a 3D model, so I downloaded [Polycam](https://poly.cam/
-), one of many free Photogrammetry tools out there.
+This immediately sounded like a thrilling project to me to work on. It also sounded like a problem for which tools already existed, so I did a short search. I found something being heavily marketed to me called [Spline](https://spline.design/), which seemed very powerful, and did seem to have live collaboration capabilities. It seemed like if I sat down with David we might be able to find a way to use this. In any case, the first step was creating a 3D model, so I downloaded [Polycam](https://poly.cam/), one of many free Photogrammetry tools out there.
 
 ![[spline.png]]
 
 > "**Photogrammetry** is the science and technology of obtaining reliable information about physical objects and the environment through the process of recording, measuring and interpreting photographic images and patterns of electromagnetic radiant imagery and other phenomena" - Wikipedia.
 
-When I refer to photogrammetry, I am referring to a process in which an object is photographed many times from many angles. The aggregated visual information across these pictures is then used to generate a 3D model with a mesh and textures.
+When I refer to photogrammetry, I'm referring to something slightly more than than Wikipedia entry above. I am referring to a process in which an object is photographed many times from many angles. The aggregated visual information across these pictures is then used to generate a 3D model with a mesh and textures.
 
-I'm very impressed with the lighting in spine, as well as the fidelity of a model I made with Polycam that only took about five minutes to create. Because Polycam is a free service, they cap the amount of photos they will analyze, and those photos were taken by a humble iPhone SE held by an amateur photogrammetrist. A professional photogrammetry model could be much more detailed.
+I'm impressed by the lighting in Spline, and the fidelity of the model I created with Polycam in less than five minutes. Because Polycam is a free service, they cap the amount of photos they will analyze (150), and those photos were taken by a humble iPhone SE held by an amateur photogrammetrist. A professional photogrammetry model could be much more detailed.
 
-I was less impressed by the comment system, which didn't seem to allow me to make comments that were locked in space.
+I was *less* impressed by Spline's comment system, which didn't seem to allow me to make comments that were locked in space, or particularly easy to read.
 
-Once I had the model, the idea felt much more tangible, so I opened up my IDE and starting writing some code to see if I could at least render some pixels on a screen.
-
-I created a simple file uploader that could take the 3D GLB files that Polycam creates.
+Once I could see the model I created, the idea felt much more tangible, so I opened up my IDE and starting writing some code to see if I could at least render some pixels on a screen. I started with a simple file uploader that could take the 3D GLB files that Polycam creates.
 
 ![[upload_form.png]]
 
-And I used a middleware package called `multer` to serve some file storage:
+Then I installed middleware package called `multer` to serve some file storage from the server:
 
 ```javascript
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -133,13 +130,30 @@ The result is far from perfect, but for a day's work I'm happy with it!
 
 <div class="video-container"> <video controls> <source src="https://thornberry-garden.s3.us-east-2.amazonaws.com/backpack.mov" type="video/mp4"> Your browser does not support the video tag. </video> </div>
 
-I think that with Websockets and some careful spatial math, I could build this into a useful object annotation tool. While working on it, I realized that the things I would like to improve are:
+You may notice in the code above that I am calculating the intersection between the user's mouse and the model, and then sending that to the server. What isn't totally clear from the video above is that on the server, those mouse updates are getting saved to an object of mouse updates associated with players, allowing players in theory to see the live cursor location of another user:
+
+```javascript
+socket.on('cursorPosition', (data) => {
+	clients[data.playerId] = {...clients[data.playerId], ...data}
+	socket.emit('cursors', clients)
+});
+```
+
+This seemed to work, although when I opened things up in two tabs, it seemed like the javascript execution (and therefore the event listeners) was paused for the inactive window; I would see the updates to the cursor positions, but only when I used that tab. This behavior isn't consistent with another [[Eco Mog |websocket project of mine]]. I'm not sure what's causing it. In hindsight, I should have called up a friend to test this locally. However, my roommate wasn't home, and I was itching to see if this worked, so I decided to deploy it and test the cursor syncing between my phone and laptop.
+
+Once deployed, I realized that in order for my server's file server to work, I would need to configure a Docker volume. This should be pretty easy in theory, but I also realized I hadn't thought through the file storage at all when jumping in, and I had some pretty basic questions about what architecture to go with:
+- Should I save the files on the server, or use a file storage platform like S3?
+- What is the ideal user flow of file uploading? If the files are all there, should there be a directory of active projects, or should you just upload and get redirected to a route just for that 3D model?
+
+Much of the Sunday was gone at this point. It seemed like a good time to go pause and go on a bike ride, so I left these questions for a later time.
+
+With websockets and careful spatial math, I could build this into a useful object annotation tool. While working on it, I realized that the things I would like to improve are:
 
 - Use routing so that links can be created for multiple 3D objects
-- persist those objects
-- persist the comments about them, too
-- Use multiple "rooms" so that different conversations can happen about different objects simultaneously
+- persist those objects in storage
+- persist the comments about them, too, in a database
+- Route socket activity into distinct "rooms" so that different conversations can happen about different objects simultaneously
 
 **Next.JS** paired with **Firebase Storage** and **Supabase** or **Firestore** would be a fast way to get V2 up and running.
 
-As far as solving the problem I set out to solve, I should spend more time with existing tools. But if I find an existing tool that works, it will still be tempting to create this because of how fun the challenge of working with multiplayer data is.
+As far as solving the problem I set out to solve, I would like to spend more time with existing tools. But if I find an existing tool that works for David, it will still be tempting to create this because of how fun the challenge of working with multiplayer data is.
