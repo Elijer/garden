@@ -3,10 +3,7 @@ publish: true
 tags:
   - project
 ---
-
-
-![[Screenshot 2024-07-15 at 7.25.32 AM.png]]
-
+![[backpack.png]]
 I was talking to a backpack designer and, being someone who carries a backpack almost everywhere, had a lot of questions. He told me about sending designs to a factory overseas and the communication process involved. I asked him what the trickiest part about that process was and if he could buy/build any technology, what would help the process go more smoothly.
 
 David told me that if both he and his sample designer in Vietnam could wear a VR headset and see the other point at things, and annotate parts of a 3D design in front of them, that could save a lot of time.
@@ -14,11 +11,12 @@ David told me that if both he and his sample designer in Vietnam could wear a VR
 This immediately sounded like a thrilling project to me to work on. However, it also seemed like there were probably tools out there that would do exactly what we were talking about. I tried out something called [Spline](https://spline.design/), which seemed very powerful, and did seem to have live collaboration capabilities. It seemed like if I sat down with David we might be able to find a way to use this. In any case, the first step was creating a 3D model, so I downloaded [Polycam](https://poly.cam/
 ), one of many free Photogrammetry tools out there.
 
+![[spline.png]]
+
 > "**Photogrammetry** is the science and technology of obtaining reliable information about physical objects and the environment through the process of recording, measuring and interpreting photographic images and patterns of electromagnetic radiant imagery and other phenomena" - Wikipedia.
 
 When I refer to photogrammetry, I am referring to a process in which an object is photographed many times from many angles. The aggregated visual information across these pictures is then used to generate a 3D model with a mesh and textures.
 
-![[Screenshot 2024-07-15 at 7.31.58 AM.png]]
 I'm very impressed with the lighting in spine, as well as the fidelity of a model I made with Polycam that only took about five minutes to create. Because Polycam is a free service, they cap the amount of photos they will analyze, and those photos were taken by a humble iPhone SE held by an amateur photogrammetrist. A professional photogrammetry model could be much more detailed.
 
 I was less impressed by the comment system, which didn't seem to allow me to make comments that were locked in space.
@@ -27,7 +25,7 @@ Once I had the model, the idea felt much more tangible, so I opened up my IDE an
 
 I created a simple file uploader that could take the 3D GLB files that Polycam creates.
 
-![[Screenshot 2024-07-15 at 7.37.42 AM.png]]
+![[upload_form.png]]
 
 And I used a middleware package called `multer` to serve some file storage:
 
