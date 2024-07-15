@@ -4,6 +4,8 @@ tags:
   - project
 ---
 ![[backpack.png]]
+> This is a screenshot of this project - you can see a video of it below
+
 I was talking to a backpack designer and, being someone who carries a backpack almost everywhere, had a lot of questions. He told me about sending designs to a factory overseas and the communication process involved. I asked him what the trickiest part about that process was and if he could buy/build any technology, what would help the process go more smoothly.
 
 David told me that if both he and his sample designer in Vietnam could wear a VR headset, see the other point at things, and annotate parts of a 3D design in front of them, that would save a lot of time - maybe weeks on the month.
