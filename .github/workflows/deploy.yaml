@@ -19,6 +19,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
 
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetch all history for git info
+          submodules: 'false'
 
       # Configure SSH and fetch private submodule
       - name: Configure SSH and fetch private submodule
@@ -29,11 +33,6 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global url."git@github.com:".insteadOf "https://github.com/"
           git submodule update --init --recursive --depth=1
-
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 # Fetch all history for git info
-          submodules: 'true'
 
       - uses: actions/setup-node@v3
         with:
