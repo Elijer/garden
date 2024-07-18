@@ -27,9 +27,10 @@ jobs:
       - name: Configure SSH and fetch private submodule
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}" > ~/.ssh/garden_github_rsa
-          chmod 600 ~/.ssh/garden_github_rsa
+          echo "${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global url."git@github.com:".insteadOf "https://github.com/"
           git submodule update --init --recursive --depth=1
 
       - uses: actions/setup-node@v3
