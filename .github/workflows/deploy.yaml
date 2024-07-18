@@ -21,7 +21,17 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Fetch all history for git info
-          submodules: 'true'
+          submodules: 'recursive'
+
+                # Configure SSH and fetch private submodule
+      - name: Configure SSH and fetch private submodule
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SUBMODULE_SSH_PRIVATE_KEY }}" > ~/.ssh/garden_github_rsa
+          chmod 600 ~/.ssh/garden_github_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git submodule update --init --recursive --depth=1
+
       - uses: actions/setup-node@v3
         with:
           node-version: 18.14
