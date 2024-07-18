@@ -12,7 +12,7 @@
     "url": "https://elijer.github.io/garden"
   },
   "scripts": {
-    "blog": "npx quartz build --serve --directory ./content/blog",
+    "blog": "npx quartz build --serve --directory ~/garden_content/blog",
     "deploy": "npx quartz sync",
     "quartz": "./quartz/bootstrap-cli.mjs",
     "docs": "npx quartz build --serve -d docs",
