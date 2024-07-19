@@ -18,23 +18,37 @@ app.post('/run-commands', (req, res) => {
         env: process.env
     });
 
-    let command = `
-        cd ${vaultPath};
-        git add .;
-        git commit -m "${message || 'blog changes'}";
-        git push;
-        cd ..;
-        npm run deploy;
-    `;
+    // Accumulate output
+    let output = '';
+    let errorOutput = '';
 
-    ptyProcess.write(command + '\r');
+    // Define command sequence
+    const commands = [
+        `cd ${vaultPath}`,
+        'git add .',
+        `git commit -m "${message || 'blog changes'}"`,
+        'git push',
+        'cd ..',
+        'npm run deploy'
+    ];
+
+    // Write each command separately
+    commands.forEach(cmd => ptyProcess.write(`${cmd}\r`));
 
     ptyProcess.on('data', (data) => {
-        res.write(data);
+        output += data;
     });
 
     ptyProcess.on('exit', (code) => {
-        res.end(`Process exited with code ${code}`);
+        if (code !== 0) {
+            errorOutput += `Process exited with code ${code}`;
+        }
+        res.status(code === 0 ? 200 : 500).end(output || errorOutput);
+    });
+
+    // Error handling for ptyProcess
+    ptyProcess.on('error', (error) => {
+        res.status(500).end(`Error: ${error.message}`);
     });
 });
 
