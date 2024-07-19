@@ -11,9 +11,9 @@ const config: QuartzConfig = {
     pageTitle: "🪴 Elijah Kennedy",
     enableSPA: true,
     enablePopovers: true,
-    analytics: {
+    analytics: [{
       provider: "plausible",
-    },
+    }],
     locale: "en-US",
     baseUrl: "elijer.github.io",
     ignorePatterns: ["private", "templates", ".obsidian"],

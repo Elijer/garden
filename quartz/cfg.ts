@@ -4,7 +4,9 @@ import { ValidLocale } from "./i18n"
 import { PluginTypes } from "./plugins/types"
 import { Theme } from "./util/theme"
 
-export type Analytics =
+export type Analytics = Lytic[]
+
+export type Lytic =
   | null
   | {
       provider: "plausible"
