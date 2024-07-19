@@ -11,18 +11,20 @@ const config: QuartzConfig = {
     pageTitle: "🪴 Elijah Kennedy",
     enableSPA: true,
     enablePopovers: true,
-    analytics: [{
+    analytics: [
+      {
       provider: "umami",
       websiteId: "9937c077-880d-477c-b830-8757700f8784"
-    },
-    {
-      provider: "goatcounter",
-      websiteId: "thornberry"
-    },
-    {
-      provider: "google",
-      tagId: "G-L3LV7GFPBT"
-    }],
+      },
+      {
+        provider: "goatcounter",
+        websiteId: "thornberry"
+      },
+      {
+        provider: "google",
+        tagId: "G-L3LV7GFPBT"
+      }
+    ],
     locale: "en-US",
     baseUrl: "elijer.github.io",
     ignorePatterns: ["private", "templates", ".obsidian"],
@@ -32,7 +34,15 @@ const config: QuartzConfig = {
       cdnCaching: true,
       typography: {
         header: "Schibsted Grotesk",
-        body: "Source Sans Pro",
+        // header: "Raleway",
+        // header: "Merriweather Sans",
+        // header: "Robot Mono",
+        // header: "Inconsolata",
+        // body: "Source Sans Pro",
+        body: "Nunito",
+        // body: "Raleway",
+        // body: "Poppins",
+        // body: "Quicksand",
         code: "IBM Plex Mono",
       },
       colors: {
