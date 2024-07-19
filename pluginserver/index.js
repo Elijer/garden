@@ -45,6 +45,7 @@ app.post('/run-commands', (req, res) => {
     });
 
     ptyProcess.on('exit', (code) => {
+      console.log("Exited")
         if (code !== 0) {
             errorOutput += `Process exited with code ${code}`;
         }
@@ -53,6 +54,7 @@ app.post('/run-commands', (req, res) => {
 
     // Error handling for ptyProcess
     ptyProcess.on('error', (error) => {
+      console.log("There was an error")
         res.status(500).end(`Error: ${error.message}`);
     });
 });
