@@ -12,7 +12,16 @@ const config: QuartzConfig = {
     enableSPA: true,
     enablePopovers: true,
     analytics: [{
-      provider: "plausible",
+      provider: "umami",
+      websiteId: "9937c077-880d-477c-b830-8757700f8784"
+    },
+    {
+      provider: "goatcounter",
+      websiteId: "thornberry"
+    },
+    {
+      provider: "google",
+      tagId: "G-L3LV7GFPBT"
     }],
     locale: "en-US",
     baseUrl: "elijer.github.io",
