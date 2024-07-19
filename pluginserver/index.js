@@ -1,10 +1,12 @@
 import os from 'os';
 import pty from 'node-pty';
 import express from 'express';
+import cors from 'cors';
 
 const app = express();
 const port = 3009;
 
+app.use(cors()); // Enable CORS
 app.use(express.json());
 
 app.post('/run-commands', (req, res) => {
