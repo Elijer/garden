@@ -20,7 +20,7 @@ app.post('/run-commands', (req, res) => {
         env: process.env
     });
 
-    // Accumulate output
+    // Accumulate output and errors
     let output = '';
     let errorOutput = '';
 
@@ -36,6 +36,9 @@ app.post('/run-commands', (req, res) => {
 
     // Write each command separately
     commands.forEach(cmd => ptyProcess.write(`${cmd}\r`));
+
+    // End input and handle output
+    ptyProcess.write('\x04'); // Send EOF signal to end the input
 
     ptyProcess.on('data', (data) => {
         output += data;
