@@ -12,6 +12,7 @@ export const sharedPageComponents: SharedLayout = {
       Portfolio: "https://elijahkennedy.com/",
       LinkedIn: "https://www.linkedin.com/in/eliken/",
       Youtube: "https://www.youtube.com/@elijah_thornberry",
+      SoundCloud: "https://soundcloud.com/eliahuu",
       // Vimeo: "https://vimeo.com/squarrow",
       // Twitter: "https://twitter.com/elijahreissman"
     },
