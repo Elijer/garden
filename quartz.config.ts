@@ -68,14 +68,25 @@ const config: QuartzConfig = {
           highlight: "#ECD6C0", // tag background color / link background color
           textHighlight: "#00EBD1",
         },
+        // darkMode: {
+        //   light: "#161618",
+        //   lightgray: "#393639",
+        //   gray: "#646464",
+        //   darkgray: "#d4d4d4",
+        //   dark: "#ebebec",
+        //   secondary: "#7b97aa",
+        //   tertiary: "rgba(255, 200, 255, 1)",
+        //   highlight: "rgba(143, 159, 169, 0.15)",
+        //   textHighlight: "#b3aa0288",
+        // },
         darkMode: {
-          light: "#161618",
-          lightgray: "#393639",
-          gray: "#646464",
-          darkgray: "#d4d4d4",
-          dark: "#ebebec",
-          secondary: "#7b97aa",
-          tertiary: "rgba(255, 200, 255, 1)",
+          dark: "#347967", // titles
+          light: "#1A1F23", // bg
+          lightgray: "#21262A", // searchbar
+          gray: "#404946", // meta data
+          darkgray: "#95ABBC", // text, carrots, search bar text
+          secondary: "#AF8579", // site title, tag color, folder headers
+          tertiary: "#FEC5B6",
           highlight: "rgba(143, 159, 169, 0.15)",
           textHighlight: "#b3aa0288",
         },
