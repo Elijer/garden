@@ -68,16 +68,27 @@ const config: QuartzConfig = {
           highlight: "#ECD6C0", // tag background color / link background color
           textHighlight: "#00EBD1",
         },
+        // darkMode: {
+        //   light: "#161618",
+        //   lightgray: "#393639",
+        //   gray: "#646464",
+        //   darkgray: "#d4d4d4",
+        //   dark: "#ebebec",
+        //   secondary: "#7b97aa",
+        //   tertiary: "rgba(255, 200, 255, 1)",
+        //   highlight: "rgba(143, 159, 169, 0.15)",
+        //   textHighlight: "#b3aa0288",
+        // },
         darkMode: {
-          light: "#161618",
-          lightgray: "#393639",
-          gray: "#646464",
-          darkgray: "#d4d4d4",
-          dark: "#ebebec",
-          secondary: "#7b97aa",
-          tertiary: "rgba(255, 200, 255, 1)",
-          highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#b3aa0288",
+          dark: "#bc8d82", // Article Titles
+          light: "#140c14", // bg
+          lightgray: "#202024", // searchbar
+          gray: "#363b60", // meta data
+          darkgray: "#EDD5D2", // text, carrots, search bar text
+          secondary: "#bc8d82", // site title, tag text color, folder headers
+          tertiary: "#695fbe", // link hover, non-activated page in graph color
+          highlight: "#202024", //  tag background color / link background color
+          textHighlight: "#695fbe", // ???
         },
         // darkMode: {
         //   dark: "#347967", // titles
