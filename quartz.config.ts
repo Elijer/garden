@@ -46,16 +46,27 @@ const config: QuartzConfig = {
         code: "IBM Plex Mono",
       },
       colors: {
+        // lightMode: {
+        //   light: "#faf8f8",
+        //   lightgray: "#e5e5e5",
+        //   gray: "#b8b8b8",
+        //   darkgray: "#4e4e4e",
+        //   dark: "#2b2b2b",
+        //   secondary: "#284b63",
+        //   tertiary: "#84a59d",
+        //   highlight: "rgba(143, 159, 169, 0.15)",
+        //   textHighlight: "#fff23688",
+        // },
         lightMode: {
-          light: "#faf8f8",
-          lightgray: "#e5e5e5",
-          gray: "#b8b8b8",
-          darkgray: "#4e4e4e",
-          dark: "#2b2b2b",
-          secondary: "#284b63",
-          tertiary: "#84a59d",
-          highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#fff23688",
+          dark: "#B18164", // titles
+          light: "#F7F1ED", // background
+          lightgray: "#ECD6C1", // searchbar
+          darkgray: "#445150", // text, carrots, search bar text, 
+          gray: "#B5A4AF", // Meta data - data, how long the read is etc
+          secondary: "#75918E", // Site folder headers, links text, active page in graph color
+          tertiary: "#DD9971", // link hover, non-activated page in graph color
+          highlight: "#ECD6C0", // tag background color / link background color
+          textHighlight: "#00EBD1",
         },
         darkMode: {
           light: "#161618",
