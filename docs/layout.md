@@ -15,7 +15,7 @@ export interface FullPageLayout {
   afterBody: QuartzComponent[] // laid out vertically
   left: QuartzComponent[] // vertical on desktop, horizontal on mobile
   right: QuartzComponent[] // vertical on desktop, horizontal on mobile
-  footer: QuartzComponent // single component
+  // footer: QuartzComponent // single component
 }
 ```
 

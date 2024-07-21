@@ -82,54 +82,63 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
     if (lytic?.provider === "google") {
       const tagId = lytic.tagId
       componentResources.afterDOMLoaded.push(`
-        const gtagScript = document.createElement("script")
-        gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=${tagId}"
-        gtagScript.async = true
-        document.head.appendChild(gtagScript)
+        if (window.location.hostname !== "localhost"){
+          const gtagScript = document.createElement("script")
+          gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=${tagId}"
+          gtagScript.async = true
+          document.head.appendChild(gtagScript)
 
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag("js", new Date());
-        gtag("config", "${tagId}", { send_page_view: false });
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag("js", new Date());
+          gtag("config", "${tagId}", { send_page_view: false });
 
-        document.addEventListener("nav", () => {
-          gtag("event", "page_view", {
-            page_title: document.title,
-            page_location: location.href,
+          document.addEventListener("nav", () => {
+            gtag("event", "page_view", {
+              page_title: document.title,
+              page_location: location.href,
+            });
           });
-        });`)
+        }
+      `)
     } else if (lytic?.provider === "plausible") {
       const plausibleHost = lytic.host ?? "https://plausible.io"
       componentResources.afterDOMLoaded.push(`
-        const plausibleScript = document.createElement("script")
-        plausibleScript.src = "${plausibleHost}/js/script.manual.js"
-        plausibleScript.setAttribute("data-domain", location.hostname)
-        plausibleScript.defer = true
-        document.head.appendChild(plausibleScript)
+        if (window.location.hostname !== "localhost"){
+          const plausibleScript = document.createElement("script")
+          plausibleScript.src = "${plausibleHost}/js/script.manual.js"
+          plausibleScript.setAttribute("data-domain", location.hostname)
+          plausibleScript.defer = true
+          document.head.appendChild(plausibleScript)
 
-        window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+          window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
 
-        document.addEventListener("nav", () => {
-          plausible("pageview")
-        })
+          document.addEventListener("nav", () => {
+            plausible("pageview")
+          })
+        }
       `)
     } else if (lytic?.provider === "umami") {
       componentResources.afterDOMLoaded.push(`
-        const umamiScript = document.createElement("script")
-        umamiScript.src = "${lytic.host ?? "https://analytics.umami.is"}/script.js"
-        umamiScript.setAttribute("data-website-id", "${lytic.websiteId}")
-        umamiScript.async = true
+        if (window.location.hostname !== "localhost"){
+          const umamiScript = document.createElement("script")
+          umamiScript.src = "${lytic.host ?? "https://analytics.umami.is"}/script.js"
+          umamiScript.setAttribute("data-website-id", "${lytic.websiteId}")
+          umamiScript.async = true
 
-        document.head.appendChild(umamiScript)
+          document.head.appendChild(umamiScript)
+        }
       `)
     } else if (lytic?.provider === "goatcounter") {
       componentResources.afterDOMLoaded.push(`
-        const goatcounterScript = document.createElement("script")
-        goatcounterScript.src = "${lytic.scriptSrc ?? "https://gc.zgo.at/count.js"}"
-        goatcounterScript.async = true
-        goatcounterScript.setAttribute("data-goatcounter",
-          "https://${lytic.websiteId}.${lytic.host ?? "goatcounter.com"}/count")
-        document.head.appendChild(goatcounterScript)
+        if (window.location.hostname !== "localhost"){
+          const goatcounterScript = document.createElement("script")
+          goatcounterScript.src = "${lytic.scriptSrc ?? "https://gc.zgo.at/count.js"}"
+          goatcounterScript.async = true
+          goatcounterScript.setAttribute("data-goatcounter",
+            "https://${lytic.websiteId}.${lytic.host ?? "goatcounter.com"}/count")
+          document.head.appendChild(goatcounterScript)
+        }
       `)
     } else if (lytic?.provider === "posthog") {
       componentResources.afterDOMLoaded.push(`
