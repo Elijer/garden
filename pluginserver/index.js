@@ -31,6 +31,8 @@ app.post('/run-commands', (req, res) => {
         `git commit -m "${message || 'blog changes'}"`,
         'git push',
         'cd ..',
+        'git add .',
+        'git push',
         'npm run deploy'
     ];
 
