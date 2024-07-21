@@ -26,15 +26,15 @@ app.post('/run-commands', (req, res) => {
 
     // Define command sequence
     const commands = [
-        `cd ${vaultPath}`,
-        'git add .',
-        `git commit -m "${message || 'blog changes'}"`,
-        'git push',
-        'cd ..',
-        'git add .',
-        'git push',
-        'npm run deploy'
-    ];
+      `cd ${vaultPath} && `,                   // Navigate to vaultPath
+      'git add . && ',                        // Add changes
+      `git commit -m "${message || 'blog changes'}" && `, // Commit changes
+      'git push && ',                        // Push changes
+      'cd .. && ',                           // Navigate back to the parent directory
+      'git add . && ',                      // Add any new changes in the parent directory
+      'git push && ',                      // Push changes in the parent directory
+      'npm run deploy'                      // Run deployment
+  ];
 
     // Write each command separately
     commands.forEach(cmd => ptyProcess.write(`${cmd}\r`));
