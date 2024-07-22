@@ -26,16 +26,20 @@ app.post('/run-commands', (req, res) => {
 
     // Define command sequence
     const commands = [
-      'cd  ${vaultPath',
+      `cd  ${vaultPath}`,
       "git add .",
       `git commit -m "${message || 'blog changes'}"`,
       'git push',
       'cd ..',
       'npm run deploy'
-  ];
+    ];
 
     // Write each command separately
-    commands.forEach(cmd => ptyProcess.write(`${cmd}\r`));
+    try {
+      commands.forEach(cmd => ptyProcess.write(`${cmd}\r`));
+    } catch {
+      res.status(500).end('Error: Could not write to the terminal');
+    }
 
     // End input and handle output
     ptyProcess.write('\x04'); // Send EOF signal to end the input
