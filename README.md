@@ -30,4 +30,6 @@ HOWEVER
 
 There may be an easier way that just has to do with the submodule being nested inside of the same local folder as its parent. Sort of confuses me why this would be necessary or how this would work though.
 
-//
+Okay I'm doing something wrong in how I'm adding submodules. They are not getting intialized correctly - they have the remote of their PARENT for some reason. Found a way to fix this, which is cloning them first and then manually checking the .gitmodules file, but it's really weird I've got to do this and I must be missing something.
+
+POSSIBLY a separate issue is that when I run the pluginserver/index.js route, then the content folder of the blog is being deleted, but I can see how that would be very related.
