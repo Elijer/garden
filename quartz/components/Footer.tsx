@@ -37,6 +37,7 @@ export default ((opts?: Options) => {
           {i18n(cfg.locale).components.footer.createdWith}{" "}
           <a href="https://quartz.jzhao.xyz/">Quartz v{version}</a> © {year}
         </p> */}
+        <p>Special thanks to my brother for inspiring me to create this blog!</p>
         <ul>
           {Object.entries(links).map(([text, link]) => (
             <li>
