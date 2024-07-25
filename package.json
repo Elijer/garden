@@ -6,10 +6,10 @@
   "type": "module",
   "author": "jackyzha0 <j.zhao2k19@gmail.com>",
   "license": "MIT",
-  "homepage": "https://elijer.github.io/garden",
+  "homepage": "https://elijer.github.io/",
   "repository": {
     "type": "git",
-    "url": "https://elijer.github.io/garden"
+    "url": "https://elijer.github.io/"
   },
   "scripts": {
     "blog": "npx quartz build --serve --directory ./content/blog",
