@@ -23,6 +23,10 @@ const config: QuartzConfig = {
       {
         provider: "google",
         tagId: "G-L3LV7GFPBT"
+      },
+      {
+        provider: "hotjar",
+        hjid: 3001133
       }
     ],
     locale: "en-US",

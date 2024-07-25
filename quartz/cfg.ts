@@ -40,6 +40,10 @@ export type Lytic =
       provider: "cabin"
       host?: string
     }
+  | {
+    provider: "hotjar",
+    hjid: number
+  }
 
 export interface GlobalConfiguration {
   pageTitle: string

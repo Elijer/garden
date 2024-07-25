@@ -140,6 +140,17 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
           document.head.appendChild(goatcounterScript)
         }
       `)
+      } else if (lytic?.provider === "hotjar") {
+        componentResources.afterDOMLoaded.push(`
+          const hotJarScript = document.createElement("script")
+          hotJarScript.innerHTML= (function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:${lytic.hjid},hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+          })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+        `)
     } else if (lytic?.provider === "posthog") {
       componentResources.afterDOMLoaded.push(`
         const posthogScript = document.createElement("script")
@@ -164,6 +175,7 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
         document.head.appendChild(cabinScript)
       `)
     }
+
   }
 
   if (cfg.enableSPA) {
