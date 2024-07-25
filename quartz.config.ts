@@ -30,7 +30,7 @@ const config: QuartzConfig = {
       }
     ],
     locale: "en-US",
-    baseUrl: "elijer.github.io",
+    baseUrl: "elijer.github.io/garden",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "created",
     theme: {
