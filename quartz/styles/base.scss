@@ -14,6 +14,7 @@ section {
   margin: 0;
   max-width: 100%;
   box-sizing: border-box;
+  // background-color: var(--light);
   background-color: var(--light);
   font-family: var(--bodyFont);
   color: var(--darkgray);
@@ -498,10 +499,6 @@ video {
 
 .spacer {
   flex: 1 1 auto;
-}
-
-div:has(> .overflow) {
-  position: relative;
 }
 
 ul.overflow,
