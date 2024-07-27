@@ -14,7 +14,6 @@ section {
   margin: 0;
   max-width: 100%;
   box-sizing: border-box;
-  // background-color: var(--light);
   background-color: var(--light);
   font-family: var(--bodyFont);
   color: var(--darkgray);
@@ -183,7 +182,7 @@ a {
     }
 
     & .sidebar.left {
-      left: calc(calc(100vw - $pageWidth) / 2.1 - $sidePanelWidth);
+      left: calc(calc(100vw - $pageWidth) / 2 - $sidePanelWidth);
       @media all and (max-width: $fullPageWidth) {
         gap: 0;
         align-items: center;
@@ -499,6 +498,10 @@ video {
 
 .spacer {
   flex: 1 1 auto;
+}
+
+div:has(> .overflow) {
+  position: relative;
 }
 
 ul.overflow,
