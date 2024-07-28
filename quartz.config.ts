@@ -27,6 +27,10 @@ const config: QuartzConfig = {
       {
         provider: "hotjar",
         hjid: 3001133
+      },
+      {
+        provider: "tinylytics",
+        siteId: "3Hrgo5AMhTSZ6J5zu3Fs"
       }
     ],
     locale: "en-US",
