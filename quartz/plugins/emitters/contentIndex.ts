@@ -119,7 +119,9 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
       const linkIndex: ContentIndex = new Map()
       for (const [tree, file] of content) {
         const slug = file.data.slug!
-        const date = getDate(ctx.cfg.configuration, file.data) ?? new Date()
+        // const date = getDate(ctx.cfg.configuration, file.data) ?? new Date()
+        // Hardcoded date for May 18th, 2024, when I started this blog
+        const date = getDate(ctx.cfg.configuration, file.data) ?? new Date(2024, 4, 18);
         if (opts?.includeEmptyFiles || (file.data.text && file.data.text !== "")) {
           linkIndex.set(slug, {
             title: file.data.frontmatter?.title!,
