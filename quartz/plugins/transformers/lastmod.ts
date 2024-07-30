@@ -58,21 +58,36 @@ export const CreatedModifiedDate: QuartzTransformerPlugin<Partial<Options> | und
               } else if (source === "git") {
                 if (!repo) {
                   // Get a reference to the main git repo.
-                  // It's either the same as the workdir,
-                  // or 1+ level higher in case of a submodule/subtree setup
                   repo = Repository.discover(file.cwd)
                 }
 
                 try {
-                  console.log(file.data.filePath)
-                  modified ||= await repo.getFileLatestModifiedDateAsync(file.data.filePath!)
+                  const submodulePath = path.join(file.cwd, 'path_to_submodule', file.data.filePath!);
+                  const isSubmodule = await fs.promises.stat(submodulePath).then(() => true).catch(() => false);
+                  
+                  if (isSubmodule) {
+                    // Check if the file is tracked in the submodule
+                    const submoduleRepo = Repository.discover(path.dirname(submodulePath));
+                    const isTracked = await submoduleRepo.isFileTracked(file.data.filePath!);
+                    
+                    if (isTracked) {
+                      modified ||= await submoduleRepo.getFileLatestModifiedDateAsync(file.data.filePath!);
+                    } else {
+                      console.log(
+                        chalk.yellow(
+                          `\nWarning: ${file.data.filePath!} isn't tracked in the submodule, last modification date is not available for this file`,
+                        ),
+                      );
+                    }
+                  } else {
+                    modified ||= await repo.getFileLatestModifiedDateAsync(file.data.filePath!);
+                  }
                 } catch {
                   console.log(
                     chalk.yellow(
-                      `\nWarning: ${file.data
-                        .filePath!} isn't yet tracked by git, last modification date is not available for this file`,
+                      `\nWarning: ${file.data.filePath!} isn't yet tracked by git, last modification date is not available for this file`,
                     ),
-                  )
+                  );
                 }
               }
             }
