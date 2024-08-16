@@ -77,105 +77,111 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
     componentResources.css.push(popoverStyle)
   }
 
-  for (let lytic of cfg.analytics ){
+  let dontTrack = sessionStorage.getItem("donttrack")
+  if (dontTrack === "true"){
+    // don't track
+  } else {
+    
+    for (let lytic of cfg.analytics ){
 
-    if (lytic?.provider === "google") {
-      const tagId = lytic.tagId
-      componentResources.afterDOMLoaded.push(`
-        if (window.location.hostname !== "localhost"){
-          const gtagScript = document.createElement("script")
-          gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=${tagId}"
-          gtagScript.async = true
-          document.head.appendChild(gtagScript)
-
-          window.dataLayer = window.dataLayer || [];
-          function gtag() { dataLayer.push(arguments); }
-          gtag("js", new Date());
-          gtag("config", "${tagId}", { send_page_view: false });
-
-          document.addEventListener("nav", () => {
-            gtag("event", "page_view", {
-              page_title: document.title,
-              page_location: location.href,
-            });
-          });
-        }
-      `)
-    } else if (lytic?.provider === "plausible") {
-      const plausibleHost = lytic.host ?? "https://plausible.io"
-      componentResources.afterDOMLoaded.push(`
-        if (window.location.hostname !== "localhost"){
-          const plausibleScript = document.createElement("script")
-          plausibleScript.src = "${plausibleHost}/js/script.manual.js"
-          plausibleScript.setAttribute("data-domain", location.hostname)
-          plausibleScript.defer = true
-          document.head.appendChild(plausibleScript)
-
-          window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
-
-          document.addEventListener("nav", () => {
-            plausible("pageview")
-          })
-        }
-      `)
-    } else if (lytic?.provider === "umami") {
-      componentResources.afterDOMLoaded.push(`
-        if (window.location.hostname !== "localhost"){
-          const umamiScript = document.createElement("script")
-          umamiScript.src = "${lytic.host ?? "https://analytics.umami.is"}/script.js"
-          umamiScript.setAttribute("data-website-id", "${lytic.websiteId}")
-          umamiScript.async = true
-
-          document.head.appendChild(umamiScript)
-        }
-      `)
-    } else if (lytic?.provider === "goatcounter") {
-      componentResources.afterDOMLoaded.push(`
-        if (window.location.hostname !== "localhost"){
-          const goatcounterScript = document.createElement("script")
-          goatcounterScript.src = "${lytic.scriptSrc ?? "https://gc.zgo.at/count.js"}"
-          goatcounterScript.async = true
-          goatcounterScript.setAttribute("data-goatcounter",
-            "https://${lytic.websiteId}.${lytic.host ?? "goatcounter.com"}/count")
-          document.head.appendChild(goatcounterScript)
-        }
-      `)
-      } else if (lytic?.provider === "hotjar") {
+      if (lytic?.provider === "google") {
+        const tagId = lytic.tagId
         componentResources.afterDOMLoaded.push(`
-          const hotJarScript = document.createElement("script")
-          hotJarScript.innerHTML= (function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-            h._hjSettings={hjid:${lytic.hjid},hjsv:6};
-            a=o.getElementsByTagName('head')[0];
-            r=o.createElement('script');r.async=1;
-            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-            a.appendChild(r);
-          })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+          if (window.location.hostname !== "localhost"){
+            const gtagScript = document.createElement("script")
+            gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=${tagId}"
+            gtagScript.async = true
+            document.head.appendChild(gtagScript)
+  
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag("js", new Date());
+            gtag("config", "${tagId}", { send_page_view: false });
+  
+            document.addEventListener("nav", () => {
+              gtag("event", "page_view", {
+                page_title: document.title,
+                page_location: location.href,
+              });
+            });
+          }
         `)
-    } else if (lytic?.provider === "posthog") {
-      componentResources.afterDOMLoaded.push(`
-        const posthogScript = document.createElement("script")
-        posthogScript.innerHTML= \`!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('${lytic.apiKey}',{api_host:'${lytic.host ?? "https://app.posthog.com"}'})\`
-        document.head.appendChild(posthogScript)
-      `)
-    } else if (lytic?.provider === "tinylytics") {
-      const siteId = lytic.siteId
-      componentResources.afterDOMLoaded.push(`
-        const tinylyticsScript = document.createElement("script")
-        tinylyticsScript.src = "https://tinylytics.app/embed/${siteId}.js"
-        tinylyticsScript.defer = true
-        document.head.appendChild(tinylyticsScript)
-      `)
-    } else if (lytic?.provider === "cabin") {
-      componentResources.afterDOMLoaded.push(`
-        const cabinScript = document.createElement("script")
-        cabinScript.src = "${lytic.host ?? "https://scripts.cabin.dev"}/cabin.js"
-        cabinScript.defer = true
-        cabinScript.async = true
-        document.head.appendChild(cabinScript)
-      `)
+      } else if (lytic?.provider === "plausible") {
+        const plausibleHost = lytic.host ?? "https://plausible.io"
+        componentResources.afterDOMLoaded.push(`
+          if (window.location.hostname !== "localhost"){
+            const plausibleScript = document.createElement("script")
+            plausibleScript.src = "${plausibleHost}/js/script.manual.js"
+            plausibleScript.setAttribute("data-domain", location.hostname)
+            plausibleScript.defer = true
+            document.head.appendChild(plausibleScript)
+  
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+  
+            document.addEventListener("nav", () => {
+              plausible("pageview")
+            })
+          }
+        `)
+      } else if (lytic?.provider === "umami") {
+        componentResources.afterDOMLoaded.push(`
+          if (window.location.hostname !== "localhost"){
+            const umamiScript = document.createElement("script")
+            umamiScript.src = "${lytic.host ?? "https://analytics.umami.is"}/script.js"
+            umamiScript.setAttribute("data-website-id", "${lytic.websiteId}")
+            umamiScript.async = true
+  
+            document.head.appendChild(umamiScript)
+          }
+        `)
+      } else if (lytic?.provider === "goatcounter") {
+        componentResources.afterDOMLoaded.push(`
+          if (window.location.hostname !== "localhost"){
+            const goatcounterScript = document.createElement("script")
+            goatcounterScript.src = "${lytic.scriptSrc ?? "https://gc.zgo.at/count.js"}"
+            goatcounterScript.async = true
+            goatcounterScript.setAttribute("data-goatcounter",
+              "https://${lytic.websiteId}.${lytic.host ?? "goatcounter.com"}/count")
+            document.head.appendChild(goatcounterScript)
+          }
+        `)
+        } else if (lytic?.provider === "hotjar") {
+          componentResources.afterDOMLoaded.push(`
+            const hotJarScript = document.createElement("script")
+            hotJarScript.innerHTML= (function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+              h._hjSettings={hjid:${lytic.hjid},hjsv:6};
+              a=o.getElementsByTagName('head')[0];
+              r=o.createElement('script');r.async=1;
+              r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+              a.appendChild(r);
+            })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+          `)
+      } else if (lytic?.provider === "posthog") {
+        componentResources.afterDOMLoaded.push(`
+          const posthogScript = document.createElement("script")
+          posthogScript.innerHTML= \`!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+          posthog.init('${lytic.apiKey}',{api_host:'${lytic.host ?? "https://app.posthog.com"}'})\`
+          document.head.appendChild(posthogScript)
+        `)
+      } else if (lytic?.provider === "tinylytics") {
+        const siteId = lytic.siteId
+        componentResources.afterDOMLoaded.push(`
+          const tinylyticsScript = document.createElement("script")
+          tinylyticsScript.src = "https://tinylytics.app/embed/${siteId}.js"
+          tinylyticsScript.defer = true
+          document.head.appendChild(tinylyticsScript)
+        `)
+      } else if (lytic?.provider === "cabin") {
+        componentResources.afterDOMLoaded.push(`
+          const cabinScript = document.createElement("script")
+          cabinScript.src = "${lytic.host ?? "https://scripts.cabin.dev"}/cabin.js"
+          cabinScript.defer = true
+          cabinScript.async = true
+          document.head.appendChild(cabinScript)
+        `)
+      }
+  
     }
-
   }
 
   if (cfg.enableSPA) {
