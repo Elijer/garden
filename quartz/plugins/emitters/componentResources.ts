@@ -76,7 +76,6 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
     componentResources.afterDOMLoaded.push(popoverScript)
     componentResources.css.push(popoverStyle)
   }
-
     
   for (let lytic of cfg.analytics ){
 
@@ -178,17 +177,17 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
     }
 
   }
-}
 
-if (cfg.enableSPA) {
-  componentResources.afterDOMLoaded.push(spaRouterScript)
-} else {
-  componentResources.afterDOMLoaded.push(`
-    window.spaNavigate = (url, _) => window.location.assign(url)
-    window.addCleanup = () => {}
-    const event = new CustomEvent("nav", { detail: { url: document.body.dataset.slug } })
-    document.dispatchEvent(event)
-  `)
+  if (cfg.enableSPA) {
+    componentResources.afterDOMLoaded.push(spaRouterScript)
+  } else {
+    componentResources.afterDOMLoaded.push(`
+      window.spaNavigate = (url, _) => window.location.assign(url)
+      window.addCleanup = () => {}
+      const event = new CustomEvent("nav", { detail: { url: document.body.dataset.slug } })
+      document.dispatchEvent(event)
+    `)
+  }
 }
 
 // This emitter should not update the `resources` parameter. If it does, partial
