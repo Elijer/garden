@@ -60,7 +60,8 @@ export const CreatedModifiedDate: QuartzTransformerPlugin<Partial<Options>> = (u
                   // or 1+ level higher in case of a submodule/subtree setup
                   repo = Repository.discover(file.cwd)
                 }
-
+                
+                console.log("yo", file.cwd)
                 try {
                   modified ||= await repo.getFileLatestModifiedDateAsync(file.data.filePath!)
                 } catch {
