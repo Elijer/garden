@@ -4,6 +4,10 @@ import path from "path"
 import { write } from "./helpers"
 import DepGraph from "../../depgraph"
 
+function isStringArray(value: unknown): value is string[] {
+  return Array.isArray(value) && value.every(item => typeof item === 'string');
+}
+
 export const AliasRedirects: QuartzEmitterPlugin = () => ({
   name: "AliasRedirects",
   getQuartzComponents() {
@@ -18,7 +22,13 @@ export const AliasRedirects: QuartzEmitterPlugin = () => ({
       const aliases = file.data.frontmatter?.aliases ?? []
       const slugs = aliases.map((alias) => path.posix.join(dir, alias) as FullSlug)
       const permalink = file.data.frontmatter?.permalink
-      if (typeof permalink === "string") {
+      if (Array.isArray(permalink)){
+        permalink.forEach(link => {
+          if (typeof link === 'string'){
+            slugs.push(link as FullSlug)
+          }
+        })
+      } else if (typeof permalink === "string") {
         slugs.push(permalink as FullSlug)
       }
 
@@ -44,7 +54,13 @@ export const AliasRedirects: QuartzEmitterPlugin = () => ({
       const aliases = file.data.frontmatter?.aliases ?? []
       const slugs: FullSlug[] = aliases.map((alias) => path.posix.join(dir, alias) as FullSlug)
       const permalink = file.data.frontmatter?.permalink
-      if (typeof permalink === "string") {
+      if (Array.isArray(permalink)){
+        permalink.forEach(link => {
+          if (typeof link === 'string'){
+            slugs.push(link as FullSlug)
+          }
+        })
+      } else if (typeof permalink === "string") {
         slugs.push(permalink as FullSlug)
       }
 
