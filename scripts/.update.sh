@@ -13,20 +13,20 @@ NC='\033[0m' # No Color
 git status
 
 # Prompt the user for confirmation with a yellow message
-echo -e "${YELLOW}^^^ This is the current git status of the garden. Do you still want to commit and push both the content and the garden wrapper? (y/n): ${NC}"
-stty -icanon # Turn off canonical mode (require immediate input)
-confirm=$(head -c 1) # Read a single character
-stty icanon # Turn canonical mode back on
+# echo -e "${YELLOW}^^^ This is the current git status of the garden. Do you still want to commit and push both the content and the garden wrapper? (y/n): ${NC}"
+# stty -icanon # Turn off canonical mode (require immediate input)
+# confirm=$(head -c 1) # Read a single character
+# stty icanon # Turn canonical mode back on
 
-if [[ $confirm == [yY] ]]; then
+# if [[ $confirm == [yY] ]]; then
   # Run the git commit command with the generated message
-  cd content
-  git add .
-  git commit -m "$commit_message"
-  git push
-  cd ..
-  git add .
-  npm run deploy
-else
-    echo "Commit and push canceled."
-fi
+cd content
+git add .
+git commit -m "$commit_message"
+git push
+cd ..
+git add .
+npm run deploy
+# else
+#     echo "Commit and push canceled."
+# fi
