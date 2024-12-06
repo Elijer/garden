@@ -11,7 +11,7 @@ const NotFound: QuartzComponent = ({ cfg }: QuartzComponentProps) => {
       <h1>404</h1>
       <p>{i18n(cfg.locale).pages.error.notFound}</p>
       <a href={baseDir}>{i18n(cfg.locale).pages.error.home}</a>
-      <div>Ahh! Sorry I probably changed the name of this article and forgot to relink it. Feel free to let me know at elijahclimbs@gmail.com</div>
+      <div>Ahh! Sorry I probably changed the name of this article and forgot to relink it. Feel free to let me know at elijahclimbs dot gmail</div>
       <br></br>
       <div>If use what you see in the URL bar and plug it into the searchbar on the <a href = {baseDir}>homepage</a>, probably find it!</div>
     </article>
