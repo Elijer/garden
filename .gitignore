@@ -10,3 +10,5 @@ private/
 .replit
 replit.nix
 media_sync/
+.tmp.driveupload/
+.tmp.drivedownload/
