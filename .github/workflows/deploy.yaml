@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Fetch all history for git info
           submodules: 'false'
@@ -42,7 +42,7 @@ jobs:
       - name: Build Quartz
         run: npx quartz build --directory ./content/blog
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v4
         with:
           path: public
  
@@ -55,4 +55,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
